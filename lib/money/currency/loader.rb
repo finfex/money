@@ -4,13 +4,21 @@ class Money
       DATA_PATH = File.expand_path("../../../../config", __FILE__)
 
       class << self
+        def load!(currencies)
+          if currencies.present?
+            @currencies = currencies
+          else
+            @currencies = parse_currency_file("currency_iso.json")
+            @currencies.merge! parse_currency_file("currency_non_iso.json")
+            @currencies.merge! parse_currency_file("currency_backwards_compatible.json")
+          end
+          @currencies
+        end
         # Loads and returns the currencies stored in JSON files in the config directory.
         #
         # @return [Hash]
         def load_currencies
-          currencies = parse_currency_file("currency_iso.json")
-          currencies.merge! parse_currency_file("currency_non_iso.json")
-          currencies.merge! parse_currency_file("currency_backwards_compatible.json")
+          @currencies || load!
         end
 
         private

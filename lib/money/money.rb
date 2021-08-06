@@ -221,11 +221,7 @@ class Money
     self.conversion_precision = 16
   end
 
-  def self.inherited(base)
-    base.setup_defaults
-  end
-
-  setup_defaults
+  # setup_defaults
 
   # Use this to return the rounding mode.
   #

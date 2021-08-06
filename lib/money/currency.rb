@@ -430,7 +430,7 @@ class Money
     private
 
     def initialize_data!
-      data = self.class.table[@id]
+      data = self.class.table[@id] || raise("No #{@id} currency defined in table")
       @alternate_symbols     = data[:alternate_symbols]
       @decimal_mark          = data[:decimal_mark]
       @disambiguate_symbol   = data[:disambiguate_symbol]
