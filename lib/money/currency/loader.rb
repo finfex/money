@@ -4,7 +4,7 @@ class Money
       DATA_PATH = File.expand_path("../../../../config", __FILE__)
 
       class << self
-        def load!(currencies)
+        def load!(currencies = nil)
           if currencies.present?
             @currencies = currencies
           else
